@@ -2,6 +2,9 @@
 
 namespace Classes;
 
+use Dotenv\Dotenv as Dotenv;
+$dotenv = Dotenv::createImmutable('../includes/.env');
+$dotenv->safeLoad();
 use PHPMailer\PHPMailer\PHPMailer;
 
 class Email
@@ -25,11 +28,11 @@ class Email
         $mail = new PHPMailer();
         // Protocolo de envio de email
         $mail->isSMTP();
-        $mail->Host = 'smtp.mailtrap.io';
+        $mail->Host = $_ENV["MAIL_HOST"];
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '9a384384307c61';
-        $mail->Password = '48d3655052b0fb';
+        $mail->Port = $_ENV["MAIL_PORT"];
+        $mail->Username = $_ENV["MAIL_USER"];
+        $mail->Password = $_ENV["MAIL_PASS"];
 
         $mail->setFrom('cuentas@appsalon.com');
         $mail->addAddress($this->email, $this->nombre);
@@ -41,7 +44,7 @@ class Email
         $mail->CharSet = "UTF-8";
         $contenido = "<html>";
         $contenido .= "<p><strong>Hola " . $this->nombre . "</strong> Has Creado tu cuenta en App Salon, solo debes confirmarla presionando el siguiente enlace</p>";
-        $contenido .= "<p>Presiona aquí: <a href='https://hidden-taiga-29998.herokuapp.com/confirmar-cuenta?token=" . $this->token . "'>Confirmar Cuenta</a></p>";
+        $contenido .= "<p>Presiona aquí: <a href='". $_ENV['SERVER_HOST'] . "confirmar-cuenta?token=" . $this->token . "'>Confirmar Cuenta</a></p>";
         $contenido .= "<p>Si tu no solicitaste esta cuenta, puedes ignorar el mensaje</p>";
         $contenido .= "</html>";
 
@@ -60,11 +63,11 @@ class Email
         $mail = new PHPMailer();
         // Protocolo de envio de email
         $mail->isSMTP();
-        $mail->Host = 'smtp.mailtrap.io';
+        $mail->Host = $_ENV["MAIL_HOST"];
         $mail->SMTPAuth = true;
-        $mail->Port = 2525;
-        $mail->Username = '9a384384307c61';
-        $mail->Password = '48d3655052b0fb';
+        $mail->Port = $_ENV["MAIL_PORT"];
+        $mail->Username = $_ENV["MAIL_USER"];
+        $mail->Password = $_ENV["MAIL_PASS"];
 
         $mail->setFrom('cuentas@appsalon.com');
         $mail->addAddress($this->email, $this->nombre);
@@ -76,7 +79,7 @@ class Email
         $mail->CharSet = "UTF-8";
         $contenido = "<html>";
         $contenido .= "<p><strong>Hola " . $this->nombre . "</strong> Has solicitado restablecer tu password sigue el suigiente enlace para hacerlo</p>";
-        $contenido .= "<p>Presiona aquí: <a href=''https://hidden-taiga-29998.herokuapp.com/recuperar?token=" . $this->token . "'>Reestablecer Password</a></p>";
+        $contenido .= "<p>Presiona aquí: <a href='". $_ENV['SERVER_HOST'] . "recuperar?token=" . $this->token . "'>Reestablecer Password</a></p>";
         $contenido .= "<p>Si tu no solicitaste esta cuenta, puedes ignorar el mensaje</p>";
         $contenido .= "</html>";
 

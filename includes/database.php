@@ -13,3 +13,6 @@ if (!$db) {
     echo "error de depuración: " . mysqli_connect_error();
     exit;
 }
+
+$db->set_charset("utf8"); 
+
