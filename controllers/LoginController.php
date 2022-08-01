@@ -187,7 +187,7 @@ class LoginController
                     $resultado = $usuario->guardar();
                     
                     if($resultado){
-                        header('Location : /mensaje');
+                        header('Location: /mensaje');
                     }
                     // debuguear($usuario);
                     
