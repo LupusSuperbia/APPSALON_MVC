@@ -34,7 +34,7 @@ class Email
         $mail->Username = $_ENV["MAIL_USER"];
         $mail->Password = $_ENV["MAIL_PASS"];
 
-        $mail->setFrom('cuentas@appsalon.com');
+        $mail->setFrom($_ENV["MAIL_USER"], 'APPSALON');
         $mail->addAddress($this->email, $this->nombre);
         $mail->Subject = "Confirma tu cuenta";
 
@@ -44,7 +44,7 @@ class Email
         $mail->CharSet = "UTF-8";
         $contenido = "<html>";
         $contenido .= "<p><strong>Hola " . $this->nombre . "</strong> Has Creado tu cuenta en App Salon, solo debes confirmarla presionando el siguiente enlace</p>";
-        $contenido .= "<p>Presiona aquí: <a href='". $_ENV['SERVER_HOST'] . "confirmar-cuenta?token=" . $this->token . "'>Confirmar Cuenta</a></p>";
+        $contenido .= "<p>Presiona aquí: <a href=". $_ENV['SERVER_HOST'] . "confirmar-cuenta?token=" . $this->token . ">Confirmar Cuenta</a></p>";
         $contenido .= "<p>Si tu no solicitaste esta cuenta, puedes ignorar el mensaje</p>";
         $contenido .= "</html>";
 
@@ -79,7 +79,7 @@ class Email
         $mail->CharSet = "UTF-8";
         $contenido = "<html>";
         $contenido .= "<p><strong>Hola " . $this->nombre . "</strong> Has solicitado restablecer tu password sigue el suigiente enlace para hacerlo</p>";
-        $contenido .= "<p>Presiona aquí: <a href='". $_ENV['SERVER_HOST'] . "recuperar?token=" . $this->token . "'>Reestablecer Password</a></p>";
+        $contenido .= "<p>Presiona aquí: <a href=". $_ENV['SERVER_HOST'] . "recuperar?token=" . $this->token . ">Reestablecer Password</a></p>";
         $contenido .= "<p>Si tu no solicitaste esta cuenta, puedes ignorar el mensaje</p>";
         $contenido .= "</html>";
 
